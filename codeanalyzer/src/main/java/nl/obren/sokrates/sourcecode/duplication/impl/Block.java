@@ -59,11 +59,7 @@ public class Block {
     }
 
     public List<Block> getAllPossibleLineBlocks() {
-        return allPossibleLineBlocks;
-    }
-
-    public void setAllPossibleLineBlocks(List<Block> allPossibleLineBlocks) {
-        this.allPossibleLineBlocks = allPossibleLineBlocks;
+        return List.copyOf(allPossibleLineBlocks);
     }
 
     @Override
