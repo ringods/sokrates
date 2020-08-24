@@ -47,6 +47,7 @@ public class Blocks {
 
         this.duplicateBlocks = new ArrayList<>();
         blocksExtractor.getDuplicateBlocks().values().forEach(duplicateBlocks::add);
+        blocksExtractor = null; // Explicitly allow for GC
 
         findDuplicatedSharedAmongFiles();
 
