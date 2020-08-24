@@ -23,7 +23,6 @@ public class Files {
 
     private List<FileInfoForDuplication> files = new ArrayList<>();
     private Map<SourceFile, FileInfoForDuplication> filesMap = new HashMap<>();
-    private LineIndexesExtractor lineIndexesExtractor = new LineIndexesExtractor();
     private Map<SourceFile, CleanedContent> pathToCleanedContent = new HashMap<>();
     private int totalCleanedLinesOfCode;
     private ProgressFeedback progressFeedback;
@@ -37,20 +36,20 @@ public class Files {
             progressFeedback.setText("Transforming lines into numeric IDs");
         }
         int progressValue[] = {0};
+        final LineIndexesExtractor lineIndexesExtractor = new LineIndexesExtractor();
         sourceFiles.forEach(sourceFile -> {
             if (progressFeedback != null) {
                 progressFeedback.progress(progressValue[0]++, sourceFiles.size());
             }
-            add(sourceFile);
+            add(sourceFile, lineIndexesExtractor);
         });
-        clearUniqueLines();
-        lineIndexesExtractor = null;
+        clearUniqueLines(lineIndexesExtractor);
         if (progressFeedback != null) {
             progressFeedback.progress(progressValue[0]++, sourceFiles.size());
         }
     }
 
-    private void clearUniqueLines() {
+    private void clearUniqueLines(LineIndexesExtractor lineIndexesExtractor) {
         if (progressFeedback != null) {
             progressFeedback.setText("Clearing unique lines");
         }
@@ -63,11 +62,11 @@ public class Files {
         });
     }
 
-    public void add(SourceFile sourceFile) {
+    public void add(SourceFile sourceFile, LineIndexesExtractor lineIndexesExtractor) {
         try {
             FileInfoForDuplication fileInfoForDuplication = new FileInfoForDuplication();
             fileInfoForDuplication.setSourceFile(sourceFile);
-            fileInfoForDuplication.setLineIDs(getLinesAsNumbers(sourceFile));
+            fileInfoForDuplication.setLineIDs(getLinesAsNumbers(sourceFile, lineIndexesExtractor));
 
             files.add(fileInfoForDuplication);
             filesMap.put(sourceFile, fileInfoForDuplication);
@@ -76,7 +75,7 @@ public class Files {
         }
     }
 
-    private List<Integer> getLinesAsNumbers(SourceFile sourceFile) throws IOException {
+    private List<Integer> getLinesAsNumbers(SourceFile sourceFile, LineIndexesExtractor lineIndexesExtractor) throws IOException {
         LanguageAnalyzer languageAnalyzer = LanguageAnalyzerFactory.getInstance().getLanguageAnalyzer(sourceFile);
         CleanedContent cleanedContent = languageAnalyzer.cleanForDuplicationCalculations(sourceFile);
 
@@ -84,14 +83,6 @@ public class Files {
         totalCleanedLinesOfCode += cleanedContent.getFileLineIndexes().size();
 
         return lineIndexesExtractor.getLineIDs(cleanedContent.getLines());
-    }
-
-    public LineIndexesExtractor getLineIndexesExtractor() {
-        return lineIndexesExtractor;
-    }
-
-    public void setLineIndexesExtractor(LineIndexesExtractor lineIndexesExtractor) {
-        this.lineIndexesExtractor = lineIndexesExtractor;
     }
 
     public List<FileInfoForDuplication> getFiles() {
