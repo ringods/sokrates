@@ -21,10 +21,6 @@ public class LineIndexesExtractor {
         return totalLinesCount;
     }
 
-    public void setTotalLinesCount(int totalLinesCount) {
-        this.totalLinesCount = totalLinesCount;
-    }
-
     public List<Integer> getLineIDs(List<String> lines) {
         totalLinesCount += lines.size();
         List<Integer> lineIDs = new ArrayList<>();
