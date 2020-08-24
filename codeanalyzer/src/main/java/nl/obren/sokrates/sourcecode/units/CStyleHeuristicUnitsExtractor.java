@@ -184,9 +184,7 @@ public class CStyleHeuristicUnitsExtractor {
         LanguageAnalyzer languageAnalyzer = LanguageAnalyzerFactory.getInstance().getLanguageAnalyzer(sourceFile);
 
         CleanedContent normallyCleanedContent = languageAnalyzer.cleanForLinesOfCodeCalculations(sourceFile);
-        normallyCleanedContent.setCleanedContent(extraCleanContent(normallyCleanedContent.getCleanedContent()));
-
-        return normallyCleanedContent;
+        return new CleanedContent(extraCleanContent(normallyCleanedContent.getCleanedContent()), normallyCleanedContent.getFileLineIndexes());
     }
 
     private int getNumerOfParameters(String body) {

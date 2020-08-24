@@ -39,23 +39,21 @@ public class SourceCodeCleanerUtils {
     }
 
     public static CleanedContent cleanEmptyLinesWithLineIndexes(String content) {
-        CleanedContent cleanedContent = new CleanedContent();
         StringBuilder cleanedContentString = new StringBuilder();
-
+        
         List<String> lines = SourceCodeCleanerUtils.splitInLines(content);
+        List<Integer> lineIndices = new ArrayList<>();
         int i = 0;
         for (String line : lines) {
             if (isNotEmptyLine(line)) {
                 appendNewLineIfNotEmpty(cleanedContentString);
                 cleanedContentString.append(line);
-                cleanedContent.getFileLineIndexes().add(i);
+                lineIndices.add(i);
             }
             i++;
         }
-
-        cleanedContent.setCleanedContent(cleanedContentString.toString());
-
-        return cleanedContent;
+        
+        return new CleanedContent(cleanedContentString.toString(), lineIndices);
     }
 
     private static boolean isNotEmptyLine(String line) {
@@ -137,9 +135,7 @@ public class SourceCodeCleanerUtils {
             content = CommentsCleanerUtils.cleanLineComments(content, singleLineCommentStart);
         }
 
-        CleanedContent cleanedContent = new CleanedContent();
-        cleanedContent.setCleanedContent(content);
-        cleanedContent.setFileLineIndexes(new ArrayList<>());
+        CleanedContent cleanedContent = new CleanedContent(content, new ArrayList<>());
 
         List<String> lines = SourceCodeCleanerUtils.splitInLines(content);
         for (int i = 0; i < lines.size(); i++) {

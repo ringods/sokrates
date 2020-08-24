@@ -68,8 +68,7 @@ public class PythonHeuristicUnitsExtractor {
     private CleanedContent getCleanContent(SourceFile sourceFile) {
         CleanedContent normallyCleanedContent = LanguageAnalyzerFactory.getInstance().getLanguageAnalyzer(sourceFile)
                 .cleanForLinesOfCodeCalculations(sourceFile);
-        normallyCleanedContent.setCleanedContent(extraCleanContent(normallyCleanedContent.getCleanedContent()));
-        return normallyCleanedContent;
+        return new CleanedContent(extraCleanContent(normallyCleanedContent.getCleanedContent()), normallyCleanedContent.getFileLineIndexes());
     }
 
     private int getNumerOfParameters(String body) {
