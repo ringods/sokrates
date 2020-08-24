@@ -42,14 +42,6 @@ public class DuplicationEngine {
         return duplicates;
     }
 
-    private void populatePathToContentMap(List<SourceFile> files, Map<String, CleanedContent> pathToContent, ProgressFeedback progressFeedback) {
-        files.forEach(sourceFile -> {
-            LanguageAnalyzer analyzer = LanguageAnalyzerFactory.getInstance().getLanguageAnalyzer(sourceFile);
-            progressFeedback.setText("Loading " + sourceFile.getRelativePath() + "...");
-            pathToContent.put(sourceFile.getFile().getPath(), analyzer.cleanForDuplicationCalculations(sourceFile));
-        });
-    }
-
     public int getTotalCleanedLinesOfCode() {
         return totalCleanedLinesOfCode;
     }
