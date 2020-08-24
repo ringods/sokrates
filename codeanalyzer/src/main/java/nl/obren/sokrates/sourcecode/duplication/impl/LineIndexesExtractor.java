@@ -14,8 +14,8 @@ public class LineIndexesExtractor {
     public static final int MAX_LINE_LENGTH = 500;
 
     private int totalLinesCount = 0;
-    private Map<String, LineInfo> uniqueLinesMap = new HashMap<>();
-    private Map<Integer, LineInfo> uniqueLinesIdMap = new HashMap<>();
+    private Map<String, LineInfo> uniqueLinesMap = new HashMap<>(2000000);
+    private Map<Integer, LineInfo> uniqueLinesIdMap = new HashMap<>(2000000);
 
     public int getTotalLinesCount() {
         return totalLinesCount;
