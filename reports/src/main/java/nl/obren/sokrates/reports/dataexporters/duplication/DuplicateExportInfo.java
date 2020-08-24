@@ -23,7 +23,4 @@ public class DuplicateExportInfo {
         return duplicatedFileBlocks;
     }
 
-    public void setDuplicatedFileBlocks(List<DuplicateFileBlockExportInfo> duplicatedFileBlocks) {
-        this.duplicatedFileBlocks = duplicatedFileBlocks;
-    }
 }

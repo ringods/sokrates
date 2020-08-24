@@ -33,10 +33,6 @@ public class DuplicationInstance {
         return duplicatedFileBlocks;
     }
 
-    public void setDuplicatedFileBlocks(List<DuplicatedFileBlock> duplicatedFileBlocks) {
-        this.duplicatedFileBlocks = duplicatedFileBlocks;
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
