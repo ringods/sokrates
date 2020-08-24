@@ -22,13 +22,12 @@ public class DuplicationEngine {
     private static final Log LOG = LogFactory.getLog(DuplicationEngine.class);
 
     private int threshold = 6;
-    private List<DuplicationInstance> duplicates = new ArrayList<>();
 
     private int totalCleanedLinesOfCode = 0;
     private int numberOfDuplicatedLines;
 
     public List<DuplicationInstance> findDuplicates(List<SourceFile> sourceFiles, ProgressFeedback progressFeedback) {
-        duplicates = new ArrayList<>();
+        List<DuplicationInstance> duplicates = new ArrayList<>();
 
         Files files = new Files(progressFeedback);
         files.addAll(sourceFiles);
@@ -49,10 +48,6 @@ public class DuplicationEngine {
             progressFeedback.setText("Loading " + sourceFile.getRelativePath() + "...");
             pathToContent.put(sourceFile.getFile().getPath(), analyzer.cleanForDuplicationCalculations(sourceFile));
         });
-    }
-
-    public List<DuplicationInstance> getDuplicates() {
-        return duplicates;
     }
 
     public int getTotalCleanedLinesOfCode() {

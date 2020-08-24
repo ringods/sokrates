@@ -201,7 +201,6 @@ public class DuplicatesPane extends BorderPane {
                 ProgressFeedback progressFeedback = progressFeedbackPane.getProgressFeedback();
                 progressFeedback.start();
                 DuplicationEngine duplicationEngine = new DuplicationEngine();
-                //DuplicationEngine duplicationEngine = new DuplicationEngine();
                 List<DuplicationInstance> duplicates = duplicationEngine.findDuplicates(sourceFiles, progressFeedback);
                 int duplicatedLinesOfCode = duplicationEngine.getNumberOfDuplicatedLines();
                 int totalCleanedLinesOfCode = duplicationEngine.getTotalCleanedLinesOfCode();
