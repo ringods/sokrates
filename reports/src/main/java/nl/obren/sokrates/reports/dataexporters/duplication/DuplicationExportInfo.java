@@ -35,7 +35,7 @@ public class DuplicationExportInfo {
     }
 
     public List<DuplicateExportInfo> getDuplicates() {
-        return duplicates;
+        return List.copyOf(duplicates);
     }
 
     public void setDuplicates(List<DuplicateExportInfo> duplicates) {

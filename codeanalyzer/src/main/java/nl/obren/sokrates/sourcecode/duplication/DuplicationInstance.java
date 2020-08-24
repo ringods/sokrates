@@ -30,7 +30,7 @@ public class DuplicationInstance {
     }
 
     public List<DuplicatedFileBlock> getDuplicatedFileBlocks() {
-        return duplicatedFileBlocks;
+        return List.copyOf(duplicatedFileBlocks);
     }
 
     @Override
@@ -44,6 +44,10 @@ public class DuplicationInstance {
         stringBuilder.append(displayContent);
 
         return stringBuilder.toString();
+    }
+
+    public void addBlock(DuplicatedFileBlock block) {
+        duplicatedFileBlocks.add(block);
     }
 
     public int getBlockSize() {

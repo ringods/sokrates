@@ -43,13 +43,13 @@ public class DuplicationUtilsTest {
         duplicatedFileBlock1.setSourceFile(new SourceFile(new File(pathPrefix + "1", " ")));
         duplicatedFileBlock1.setCleanedStartLine(startLine1);
         duplicatedFileBlock1.setCleanedEndLine(startLine1 + blockSize - 1);
-        duplicationInstance.getDuplicatedFileBlocks().add(duplicatedFileBlock1);
+        duplicationInstance.addBlock(duplicatedFileBlock1);
 
         DuplicatedFileBlock duplicatedFileBlock2 = new DuplicatedFileBlock();
         duplicatedFileBlock2.setSourceFile(new SourceFile(new File(pathPrefix + "2", " ")));
         duplicatedFileBlock2.setCleanedStartLine(startLine2);
         duplicatedFileBlock2.setCleanedEndLine(startLine2 + blockSize - 1);
-        duplicationInstance.getDuplicatedFileBlocks().add(duplicatedFileBlock2);
+        duplicationInstance.addBlock(duplicatedFileBlock2);
 
         return duplicationInstance;
     }

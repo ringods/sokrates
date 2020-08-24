@@ -28,7 +28,7 @@ public class DuplicationAggregatorTest {
         duplicatedFileBlock.setCleanedEndLine(10);
         duplicatedFileBlock.setSourceFileCleanedLinesOfCode(100);
 
-        instance.getDuplicatedFileBlocks().add(duplicatedFileBlock);
+        instance.addBlock(duplicatedFileBlock);
 
         duplicates.add(instance);
 
@@ -64,8 +64,8 @@ public class DuplicationAggregatorTest {
         duplicatedFileBlock2.setCleanedEndLine(150);
         duplicatedFileBlock2.setSourceFileCleanedLinesOfCode(200);
 
-        instance.getDuplicatedFileBlocks().add(duplicatedFileBlock1);
-        instance.getDuplicatedFileBlocks().add(duplicatedFileBlock2);
+        instance.addBlock(duplicatedFileBlock1);
+        instance.addBlock(duplicatedFileBlock2);
 
         duplicates.add(instance);
 

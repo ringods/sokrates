@@ -275,7 +275,7 @@ public class Blocks {
         duplicatedFileBlock.setSourceFileCleanedLinesOfCode(cleanedContent.getFileLineIndexes().size());
 
         if (!instance.getDuplicatedFileBlocks().contains(duplicatedFileBlock)) {
-            instance.getDuplicatedFileBlocks().add(duplicatedFileBlock);
+            instance.addBlock(duplicatedFileBlock);
         }
     }
 
